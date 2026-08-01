@@ -1,8 +1,14 @@
 # AI Internship Agent
 
+<<<<<<< HEAD
 ## Implemented project structure
 
 The structure below documents only the files and modules currently implemented in the project.
+=======
+## **Implemented project structure**
+
+**The structure below documents only the files and modules currently implemented in the project.**
+>>>>>>> mentor/main
 
 ```text
 AI Internship Agent/
@@ -41,6 +47,10 @@ AI Internship Agent/
 │   │   ├── __init__.py
 │   │   ├── config.py                   # RAG configuration
 │   │   ├── embeddings.py               # Ollama embedding service
+<<<<<<< HEAD
+=======
+│   │   ├── exceptions.py               # RAG domain exceptions
+>>>>>>> mentor/main
 │   │   ├── ingestion.py                # Internship ingestion pipeline
 │   │   ├── retriever.py                # Semantic internship retrieval
 │   │   └── vector_store.py             # ChromaDB vector operations
@@ -55,9 +65,19 @@ AI Internship Agent/
 │
 ├── tests/
 │   ├── __init__.py
+<<<<<<< HEAD
 │   └── test_auth.py                    # Authentication unit tests
 │
 ├── vector_db/                          # Local ChromaDB data
+=======
+│   ├── test_auth.py                    # Authentication unit tests
+│   └── rag/
+│       ├── __init__.py
+│       ├── test_config.py              # RAG configuration unit tests
+│       └── test_vector_store.py        # Chroma client selection unit tests
+│
+├── vector_db/                          # Local ChromaDB data (embedded mode only)
+>>>>>>> mentor/main
 ├── .env                                # Local environment variables
 ├── .env.example                        # Environment variable template
 ├── .gitignore
@@ -67,6 +87,60 @@ AI Internship Agent/
 └── README.md
 ```
 
+<<<<<<< HEAD
+=======
+
+
+## Vector store
+
+The RAG layer talks to ChromaDB in one of two modes, selected by `CHROMA_MODE`.
+
+
+| Mode             | Storage                      | Visible in the Chroma DB VS Code extension |
+| ---------------- | ---------------------------- | ------------------------------------------ |
+| `http` (default) | Standalone Chroma server     | Yes                                        |
+| `embedded`       | Local `vector_db/` directory | No                                         |
+
+
+Use `http` when you want to browse the data with a GUI client. Start the server first:
+
+```powershell
+docker run --rm -p 6333:8000 chromadb/chroma:latest
+curl http://localhost:6333/api/v2/heartbeat
+```
+
+Relevant environment variables:
+
+```ini
+CHROMA_MODE=http
+CHROMA_HOST=localhost
+CHROMA_PORT=6333
+```
+
+
+
+## RAG module
+
+Ollama must be running with the `mxbai-embed-large` model pulled.
+
+### Ingestion
+
+```powershell
+ollama pull mxbai-embed-large
+uv run python -m app.rag.ingestion
+```
+
+
+
+### Sample retrieval
+
+```powershell
+uv run python -c "from app.rag.retriever import InternshipRetriever; results = InternshipRetriever().search('Python ML internship in Bangalore'); print(results)"
+```
+
+
+
+>>>>>>> mentor/main
 ## Run the application
 
 ```powershell
@@ -74,8 +148,17 @@ uv sync
 uv run python -m uvicorn app.main:app --reload
 ```
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> mentor/main
 ## Run the tests
 
 ```powershell
 uv run pytest
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> mentor/main
