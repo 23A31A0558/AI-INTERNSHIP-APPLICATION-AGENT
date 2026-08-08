@@ -6,17 +6,11 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 import chromadb
-<<<<<<< HEAD
-from chromadb.api.models.Collection import Collection
-
-from app.rag.config import RAGConfig
-=======
 from chromadb.api.client import ClientAPI
 from chromadb.api.models.Collection import Collection
 
 from app.rag.config import HTTP_MODE, RAGConfig
 from app.rag.exceptions import VectorStoreConnectionError
->>>>>>> mentor/main
 
 
 class VectorStore(ABC):
@@ -51,25 +45,16 @@ class VectorStore(ABC):
 
 
 class ChromaVectorStore(VectorStore):
-<<<<<<< HEAD
-    """Persistent ChromaDB collection for internship embeddings."""
-=======
     """ChromaDB collection for internship embeddings.
 
     Backed either by a standalone Chroma server or by an on-disk embedded
     store, selected through :class:`RAGConfig`.
     """
->>>>>>> mentor/main
 
     def __init__(self, config: RAGConfig | None = None) -> None:
         config = config or RAGConfig()
         self._collection_name = config.collection_name
-<<<<<<< HEAD
-        config.persist_dir.mkdir(parents=True, exist_ok=True)
-        self._client = chromadb.PersistentClient(path=str(config.persist_dir))
-=======
         self._client = self._build_client(config)
->>>>>>> mentor/main
         self._collection: Collection = self._create_collection()
 
     def upsert(
@@ -117,8 +102,6 @@ class ChromaVectorStore(VectorStore):
             name=self._collection_name,
             metadata={"hnsw:space": "cosine"},
         )
-<<<<<<< HEAD
-=======
 
     @staticmethod
     def _build_client(config: RAGConfig) -> ClientAPI:
@@ -138,4 +121,3 @@ class ChromaVectorStore(VectorStore):
                 f"Cannot reach the Chroma server at {config.chroma_url}. "
                 "Start it with Docker or set CHROMA_MODE=embedded."
             ) from error
->>>>>>> mentor/main

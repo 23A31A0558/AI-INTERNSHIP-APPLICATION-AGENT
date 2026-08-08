@@ -10,3 +10,5 @@ uploads/
 *.egg-info/
 dist/
 build/
+# Cursor
+.cursor/

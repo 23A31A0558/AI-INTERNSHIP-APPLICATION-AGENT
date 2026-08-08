@@ -2,13 +2,6 @@
 
 from __future__ import annotations
 
-<<<<<<< HEAD
-from dataclasses import dataclass
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-=======
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -53,7 +46,6 @@ def _resolve_chroma_port() -> int:
             f"{CHROMA_PORT_ENV_VAR} must be an integer, got {raw_port!r}"
         ) from error
 
->>>>>>> mentor/main
 
 @dataclass(frozen=True)
 class RAGConfig:
@@ -64,8 +56,6 @@ class RAGConfig:
     collection_name: str = "internships"
     persist_dir: Path = PROJECT_ROOT / "vector_db"
     default_top_k: int = 5
-<<<<<<< HEAD
-=======
 
     chroma_mode: ChromaMode = field(default_factory=_resolve_chroma_mode)
     chroma_host: str = field(
@@ -77,4 +67,3 @@ class RAGConfig:
     def chroma_url(self) -> str:
         """Return the HTTP endpoint of the configured Chroma server."""
         return f"http://{self.chroma_host}:{self.chroma_port}"
->>>>>>> mentor/main
